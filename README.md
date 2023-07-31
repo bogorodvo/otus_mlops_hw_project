@@ -55,4 +55,4 @@ FN - ошибка II-го рода. Модель может предсказыв
 * CR - Churn Rate. Доля оттока. Клиенты которые не совершили транзакций в выбранный период, например 1 месяц.
 
 ## Canvas
-![Project Canvas V1](https://disk.yandex.ru/i/jEW0v1bWHS2XwQ)
+![Project Canvas V1](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/canvas/MLOPs_Canvas_v1.png)
