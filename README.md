@@ -55,4 +55,9 @@ FN - ошибка II-го рода. Модель может предсказыв
 * CR - Churn Rate. Доля оттока. Клиенты которые не совершили транзакций в выбранный период, например 1 месяц.
 
 ## Canvas
-![Project Canvas V1](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/canvas/MLOPs_Canvas_v1.png)
+![Project Canvas V1](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/MLOPs_Canvas_v1.png)
+
+## Baseline Solution
+Эффективный дизайн прототипа разрабатываемой антифрод системы рассмотрен в [[Source]](https://fraud-detection-handbook.github.io/fraud-detection-handbook/Chapter_3_GettingStarted/BaselineModeling.html). В дальнейшем возможна его проработка в результате проработки данных проекта и с учетом планиуремой инфраструктуры.
+![Project Canvas V1](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/baseline_ML_workflow.png)
+
