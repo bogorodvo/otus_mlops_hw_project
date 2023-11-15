@@ -106,3 +106,54 @@ a) Мастер-подкластер: класс хоста s3-c2-m8, разме
 data-нод. Стандартный тип хранилища S3 может быть оптимальным вариантом.
 6. C помощью Spark данные можно сжать и партиционировать, сохранив в новый s3 баккет. Также при сохранении можно указать размер
 блоков (например 64/128 МБ) для реализации преумуществ работы Spark.
+
+# HW3
+
+## Настройка сети для работы со Spark Cluster
+
+Для создания кластера из Master и Сompute нод с установленным Spark, который способен использовать Object Storage вместо HDFS, потребуется создание виртуальной сети по [[инструкции]](https://cloud.yandex.ru/docs/data-proc/tutorials/configure-network).
+
+При создании Service Account сохранить `Access Key` и `Secret Key`. Ключи потребуются при настройке s3cmd. Роли: `mdb.dataproc.agent`; `storage.uploader`; `storage.viewer`.
+
+При настройке Security Group указать:
+
+![Security Group IN](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_3.png)
+
+![Security Group Out](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_4.png)
+
+
+## Создание Bucket в Object Storage
+
+Предварительно нужно установить утилиту `s3cmd`
+[[Инструкция]](https://cloud.yandex.ru/docs/storage/tools/s3cmd). Для настройки следует использовать ключи от `Service Account`.
+
+Баккет для полученных данных (из HW2): `s3://otus-mlops-bucket-bvo/`
+
+Баккет для обработанных данных: `s3://otus-mlops-bucket-bvo-processed/`
+
+![Bucket](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_2.png)
+
+## Создание Spark Cluster
+
+Параметры Spark кластера (40.99 руб/час):
+
+a) Мастер-подкластер: класс хоста s3-c2-m8, размер хранилища 40 ГБ.
+
+б) Compute-подкластер: класс хоста s3-c4-m16, 3 хоста, размер хранилища 128 ГБ.
+
+![Spark Cluster](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_5.png)
+
+Для проверки Spark после создания кластра требутся зайти на мастер-ноду `ssh ubuntu@public_ip` и следовать [[инструкции]](https://cloud.yandex.ru/docs/data-proc/tutorials/run-spark-job?from=int-console-help-center-or-nav). Для работы с Objact Storage также потребуется настройка s3cmd на мастер-ноде.
+
+После запуска Spark в баккете Objact Storage появятся новые папки.
+
+![Bucket](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_6.png)
+
+
+## Установка Jupyter Lab и доступ к данным
+
+На мастер-ноду скачиваем  дистрибутив `wget 'https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-x86_64.sh'` и устанавливаем. Запускаем Jupyter `jupyter notebook --no-browser --port=8888 --ip=*` и запускаем ссылку в браузере `http://publicip:8888/?token=xxxx`.
+
+Проверяем доступ к данным (пример в `notebook/HW3_InitialSparkReading.ipynb`).
+
+![Initial Job](https://github.com/bogorodvo/otus_mlops_hw_project/blob/main/project_content/HW3_7.png)
