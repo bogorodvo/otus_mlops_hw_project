@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=64.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "antifraud_homework"
+version = "1.0.1"
+authors = [
+    {name = "Bogorod Vladislav", email = "bogorodvo@gmail.com"},
+]
+description = "Otus MLOps HomeWork Project"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+homepage = "https://github.com/bogorodvo/otus_mlops_hw_project"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
