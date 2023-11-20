@@ -1,0 +1,10 @@
+# Virtual Env
+venv/
+*.egg-info
+
+# Pytest
+.pytest_cache
+tests/temp/test__*
+
+# Python
+__pycache__
