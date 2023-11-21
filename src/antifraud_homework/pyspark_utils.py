@@ -60,7 +60,7 @@ def clean_data_with_pyspark(s3path_inp: str, s3path_out: str) -> int:
         spark_df = spark_df.filter(~(col("terminal_id").isNull() | (col("terminal_id") == "Err") | (length(col("terminal_id")) > 4)))
 
         # Save results with overwrite method
-        spark_df.write.parquet(s3path_out, mode="overwrite")
+        spark_df.write.mode("overwrite").option("header", "true").option("blockSize", 128 * 1024 * 1024).parquet(s3path_out)
         # logger.error(f"File {s3path_inp} is successfully processed and saved to {s3path_out}.")
         return 0
 
@@ -72,3 +72,4 @@ def clean_data_with_pyspark(s3path_inp: str, s3path_out: str) -> int:
         # Stop SparkSession
         if spark:
             spark.stop()
+
